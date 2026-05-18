@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tempero a Gosto Refeições</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: Arial, Helvetica, sans-serif; margin: 0; background: #f5f5f5; color: #1f1f1f; }
+    header { background: #8b1e1e; color: white; padding: 22px 16px 70px; border-bottom-left-radius: 28px; border-bottom-right-radius: 28px; }
+    .topbar, .status-card, .container { max-width: 760px; margin-left: auto; margin-right: auto; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .logo { width: 58px; height: 58px; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.16); }
+    .logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    h1 { font-size: 22px; margin: 0; line-height: 1.15; }
+    .subtitle { margin: 5px 0 0; font-size: 14px; opacity: 0.95; }
+    .status-card { margin-top: -48px; margin-bottom: 18px; background: white; border-radius: 22px; padding: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.12); position: relative; z-index: 2; width: calc(100% - 28px); }
+    .status-row { display: flex; justify-content: space-between; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .open-badge { background: #e7f8ef; color: #0a8f43; padding: 8px 12px; border-radius: 999px; font-weight: bold; font-size: 13px; }
+    .mini-info { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .chip { background: #f6f6f6; border-radius: 999px; padding: 8px 11px; font-size: 13px; color: #555; }
+    .container { padding: 0 14px 24px; }
+    .section-title { margin: 20px 4px 12px; font-size: 21px; font-weight: 800; }
+    .card { background: white; border-radius: 20px; padding: 14px; margin-bottom: 16px; box-shadow: 0 4px 18px rgba(0,0,0,0.07); }
+    .item { display: flex; gap: 13px; border-bottom: 1px solid #eeeeee; padding: 14px 0; align-items: center; }
+    .item:last-child { border-bottom: none; }
+    .food-photo { min-width: 82px; width: 82px; height: 82px; border-radius: 16px; background: linear-gradient(135deg, #ffe0b2, #ffb74d); display: flex; align-items: center; justify-content: center; font-size: 34px; }
+    .item-info { flex: 1; min-width: 0; }
+    .item-name { font-weight: 800; font-size: 15px; margin-bottom: 6px; }
+    .item-desc { color: #666; font-size: 13px; line-height: 1.35; margin-bottom: 8px; }
+    .price-line { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .price { color: #222; font-size: 16px; font-weight: 800; }
+    button { border: none; border-radius: 999px; padding: 10px 14px; background: #8b1e1e; color: white; font-weight: 800; cursor: pointer; font-size: 14px; }
+    button:active { transform: scale(0.98); }
+    button.remove { background: #f1f1f1; color: #8b1e1e; padding: 7px 11px; min-width: 34px; }
+    input, textarea { width: 100%; padding: 14px; margin-top: 8px; margin-bottom: 12px; border: 1px solid #e1e1e1; border-radius: 14px; font-size: 15px; background: #fafafa; }
+    input:focus, textarea:focus { outline: none; border-color: #8b1e1e; background: white; }
+    textarea { min-height: 88px; resize: vertical; }
+    .cart-item { display: flex; justify-content: space-between; gap: 10px; padding: 12px 0; border-bottom: 1px solid #eee; align-items: center; }
+    .cart-item:last-child { border-bottom: none; }
+    .cart-name { font-weight: bold; font-size: 14px; }
+    .cart-price { color: #555; margin-top: 3px; font-size: 14px; }
+    .total-box { background: #fff4f5; border-radius: 16px; padding: 14px; margin-top: 14px; display: flex; justify-content: space-between; font-size: 18px; font-weight: 900; color: #8b1e1e; }
+    .finalizar { width: 100%; font-size: 17px; padding: 16px; margin-top: 8px; box-shadow: 0 8px 20px rgba(139,30,30,0.26); }
+    .empty { color: #777; background: #fafafa; padding: 16px; border-radius: 14px; text-align: center; }
+    .label { font-weight: 800; font-size: 14px; margin-top: 6px; display: block; }
+    @media (max-width: 480px) { h1 { font-size: 20px; } .item { align-items: flex-start; } .food-photo { width: 74px; height: 74px; min-width: 74px; } .price-line { align-items: flex-start; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo"><img src="logo.jpg" alt="Tempero a Gosto Refeições"></div>
+        <div>
+          <h1>Tempero a Gosto Refeições</h1>
+          <p class="subtitle">Quentinhas caseiras feitas com carinho</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="status-card">
+    <div class="status-row">
+      <div><strong>Cardápio do dia</strong><br><span style="color:#666;font-size:14px;">Entrega rápida pelo WhatsApp</span></div>
+      <span class="open-badge">Aberto agora</span>
+    </div>
+    <div class="mini-info">
+      <span class="chip">⭐ 4.9 avaliação</span><span class="chip">🍽️ Quentinha grande nº 9</span><span class="chip">📲 Pedido via WhatsApp</span>
+    </div>
+  </section>
+
+  <main class="container">
+    <h2 class="section-title">Mais pedidos</h2><section class="card"><div id="menu"></div></section>
+    <h2 class="section-title">Sacola</h2><section class="card"><div id="carrinho" class="empty">Sua sacola está vazia.</div><div id="total" class="total-box"><span>Total</span><span>R$ 0,00</span></div></section>
+    <h2 class="section-title">Entrega</h2><section class="card">
+      <label class="label" for="nome">Nome</label><input id="nome" placeholder="Digite seu nome" />
+      <label class="label" for="endereco">Endereço completo</label><input id="endereco" placeholder="Rua, número, bairro e referência" />
+      <label class="label" for="observacao">Observação</label><textarea id="observacao" placeholder="Ex: sem cebola, pouco feijão, troco para R$ 50,00"></textarea>
+      <button class="finalizar" onclick="finalizarPedido()">Enviar pedido pelo WhatsApp</button>
+    </section>
+  </main>
+
+  <script>
+    const telefone = "5521981361206";
+    const pratos = [
+      { emoji: "🐟", nome: "Corvina frita", desc: "Com molho de camarão, pirão e salada verde", preco: 29 },
+      { emoji: "🥘", nome: "Carne seca com abóbora", desc: "Prato caseiro bem servido", preco: 28 },
+      { emoji: "🍲", nome: "Escondidinho de costela", desc: "Com aipim e salada verde", preco: 29 },
+      { emoji: "🍗", nome: "Frango assado", desc: "Acompanha salpicão", preco: 20 },
+      { emoji: "🍢", nome: "Churrasquinho misto", desc: "Acompanha macarronese", preco: 23 },
+      { emoji: "🥞", nome: "Panqueca de carne", desc: "Acompanha salada verde", preco: 23 },
+      { emoji: "🍖", nome: "Pernil assado", desc: "Com couve e macarronese", preco: 20 },
+      { emoji: "🧅", nome: "Isca de fígado acebolado", desc: "Bem temperado e acebolado", preco: 18 },
+      { emoji: "🥩", nome: "Bife à milanesa", desc: "Acompanha batata frita", preco: 28 },
+      { emoji: "🍟", nome: "Bife à parmegiana", desc: "Com batata frita", preco: 30 },
+      { emoji: "🌭", nome: "Linguiça Toscana", desc: "Com molho vinagrete", preco: 20 },
+      { emoji: "🥗", nome: "Frango grelhado", desc: "Acompanha salada verde", preco: 20 }
+    ];
+    let carrinho = [];
+    function formatarPreco(valor) { return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }); }
+    function carregarMenu() {
+      const menu = document.getElementById("menu"); menu.innerHTML = "";
+      pratos.forEach((prato, index) => { menu.innerHTML += `<div class="item"><div class="food-photo">${prato.emoji}</div><div class="item-info"><div class="item-name">${prato.nome}</div><div class="item-desc">${prato.desc}</div><div class="price-line"><div class="price">${formatarPreco(prato.preco)}</div><button onclick="adicionarItem(${index})">Adicionar</button></div></div></div>`; });
+    }
+    function adicionarItem(index) { const prato = pratos[index]; const itemExistente = carrinho.find(item => item.nome === prato.nome); if (itemExistente) { itemExistente.quantidade++; } else { carrinho.push({ ...prato, quantidade: 1 }); } atualizarCarrinho(); }
+    function removerItem(index) { carrinho.splice(index, 1); atualizarCarrinho(); }
+    function atualizarCarrinho() {
+      const carrinhoDiv = document.getElementById("carrinho"); const totalDiv = document.getElementById("total");
+      if (carrinho.length === 0) { carrinhoDiv.className = "empty"; carrinhoDiv.innerHTML = "Sua sacola está vazia."; totalDiv.innerHTML = `<span>Total</span><span>R$ 0,00</span>`; return; }
+      carrinhoDiv.className = ""; carrinhoDiv.innerHTML = ""; let total = 0;
+      carrinho.forEach((item, index) => { const subtotal = item.preco * item.quantidade; total += subtotal; carrinhoDiv.innerHTML += `<div class="cart-item"><div><div class="cart-name">${item.quantidade}x ${item.nome}</div><div class="cart-price">${formatarPreco(subtotal)}</div></div><button class="remove" onclick="removerItem(${index})">×</button></div>`; });
+      totalDiv.innerHTML = `<span>Total</span><span>${formatarPreco(total)}</span>`;
+    }
+    function finalizarPedido() {
+      const nome = document.getElementById("nome").value.trim(); const endereco = document.getElementById("endereco").value.trim(); const observacao = document.getElementById("observacao").value.trim();
+      if (carrinho.length === 0) { alert("Adicione pelo menos um item à sacola."); return; }
+      if (!nome || !endereco) { alert("Preencha seu nome e endereço."); return; }
+      let total = 0; let texto = "Olá! Quero fazer um pedido:\n\n";
+      carrinho.forEach(item => { const subtotal = item.preco * item.quantidade; total += subtotal; texto += `${item.quantidade}x ${item.nome} - ${formatarPreco(subtotal)}\n`; });
+      texto += `\nTotal: ${formatarPreco(total)}\n\n`; texto += `Nome: ${nome}\n`; texto += `Endereço: ${endereco}\n`; if (observacao) { texto += `Observação: ${observacao}\n`; }
+      const url = `https://wa.me/${telefone}?text=${encodeURIComponent(texto)}`; window.open(url, "_blank");
+    }
+    carregarMenu();
+  </script>
+</body>
+</html>
